@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','HomeController@index');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home','HomeController@index')->name('home');
+Route::get('/customer/add','CustomerController@addView')->name('customer.add');
+Route::post('/customer/add','CustomerController@createCustomer')->name('create.customer');
+Route::get('/customer/all','CustomerController@allCustomers')->name('customer.all');
+Route::get('/customer/getData/ajax','CustomerController@getCustomers')->name('customers.get');
+Route::get('/customer/{customer}/edit','CustomerController@edit')->name('customer.edit');
+Route::put('/customer/{customer}/update','CustomerController@update')->name('customer.update');
+Route::get('/customer/{customer}/delete','CustomerController@delete')->name('customer.delete');
+
+
+// Purchase Routes
+Route::get('/purchase/add','PurchaseController@add')->name('purchase.add');
