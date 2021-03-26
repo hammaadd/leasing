@@ -20,11 +20,16 @@ class CreateCustomersTable extends Migration
             $table->enum('gender',['Male','Female'])->default('Male');
             $table->string('father',191)->nullable();
             $table->string('phone',191)->nullable();
+            $table->string('cast',191)->nullable();
+            $table->string('address_office',191)->nullable();
+            $table->string('cnic_photo',191)->nullable();
+            $table->string('address',191)->nullable();
             $table->string('office',191)->nullable();
             $table->string('profession',191)->nullable();
             $table->string('designation',191)->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

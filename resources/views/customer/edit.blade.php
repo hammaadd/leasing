@@ -81,6 +81,30 @@
                             <input type="text" class="form-control" id="designation" name="designation" value="{{$customer->designation}}">
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cast">Cast</label>
+                            <input type="text" class="form-control" id="cast" name="cast" value="{{$customer->cast}}">
+                        </div>
+                    </div> 
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" value="{{$customer->address}}">
+                        </div>
+                    </div> 
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="office_address">Office Address</label>
+                            <input type="text" class="form-control" id="office_address" name="office_address" value="{{$customer->address_office}}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cnic_photo">CNIC Photo</label>
+                            <input type="file" class="form-control" id="cnic_photo" name="cnic_photo" value="{{old('cnic_photo')}}">
+                        </div>
+                    </div>
                     <button class="btn btn-primary" type="submit"><i class="bi bi-plus-square"></i> Save customer record</button>
                 </div>
             </form>

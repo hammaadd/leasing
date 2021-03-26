@@ -26,18 +26,32 @@ class CustomerController extends Controller
             'cnic'=>'required|unique:customers',
         ]);
 
-        $data = array(
-            'name'=>$request->input('name'),
-            'cnic'=>$request->input('cnic'),
-            'gender'=>$request->input('gender'),
-            'father'=>$request->input('father'),
-            'phone'=>$request->input('phone'),
-            'office'=>$request->input('office'),
-            'profession'=>$request->input('profession'),
-            'designation'=>$request->input('designation'),
-            'created_by'=>Auth::id()
-        );
-        $res = Customer::create($data);
+            $customer = new Customer;
+            $customer->name=$request->input('name');
+            $customer->cnic=$request->input('cnic');
+            $customer->gender=$request->input('gender');
+            $customer->father=$request->input('father');
+            $customer->phone=$request->input('phone');
+            $customer->office=$request->input('office');
+            $customer->profession=$request->input('profession');
+            $customer->designation=$request->input('designation');
+            $customer->address=$request->input('address');
+            $customer->address_office=$request->input('office_address');
+            $customer->cast=$request->input('cast');
+            $customer->cast=$request->input('cast');
+            if($request->file('cnic_photo')){
+                $file = $request->file('cnic_photo');
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $imgname = uniqid() . $filename;
+                $destinationPath = public_path('/cnic');
+                $file->move($destinationPath, $imgname);
+                $customer->cnic_photo= $imgname;
+                }
+            $customer->created_by=Auth::id();
+
+        
+        $res = $customer->save();
         if($res){
             $request->session()->flash('success','Customer created successfully.');
         }else{
