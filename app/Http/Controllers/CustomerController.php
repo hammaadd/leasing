@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
@@ -40,17 +41,22 @@ class CustomerController extends Controller
             $customer->cast=$request->input('cast');
             $customer->cast=$request->input('cast');
             if($request->file('cnic_photo')){
+                $img = new Image;
                 $file = $request->file('cnic_photo');
                 $filename = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension();
                 $imgname = uniqid() . $filename;
                 $destinationPath = public_path('/cnic');
                 $file->move($destinationPath, $imgname);
-                $customer->cnic_photo= $imgname;
+                $img->name = $imgname;
+                $img->created_by = Auth::id();
+                $img->alt = $request->input('name');
+                // $customer->cnic_photo= $imgname;
+                $img->save();
                 }
             $customer->created_by=Auth::id();
 
-        
+
         $res = $customer->save();
         if($res){
             $request->session()->flash('success','Customer created successfully.');
