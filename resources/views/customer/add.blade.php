@@ -9,7 +9,7 @@
         </div>
 
         <div class="card-body">
-            <form action="{{route('create.customer')}}" method="POST">
+            <form action="{{route('create.customer')}}" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     @csrf
                     <div class="col-md-6">
@@ -101,7 +101,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="cnic_photo">CNIC Photo</label>
-                            <input type="file" class="form-control" id="cnic_photo" name="cnic_photo" value="{{old('cnic_photo')}}">
+                            <input type="file" class="form-control" id="cnic_photo" name="cnic_photo" >
                         </div>
                     </div> 
                     <button class="btn btn-primary" type="submit"><i class="bi bi-plus-square"></i> Save customer record</button>
