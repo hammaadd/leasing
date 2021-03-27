@@ -11,6 +11,8 @@ class CreateCustomersTable extends Migration
      *
      * @return void
      */
+
+
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
@@ -33,6 +35,7 @@ class CreateCustomersTable extends Migration
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
