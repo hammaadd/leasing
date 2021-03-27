@@ -9,10 +9,10 @@
         </div>
 
         <div class="card-body">
-            <form action="{{route('customer.update',$customer)}}" method="POST">
+            <form action="{{route('customer.update',$customer)}}" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     @csrf
-                    @method('PUT')
+                  
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">Name of customer</label>

@@ -24,9 +24,21 @@ Route::post('/customer/add','CustomerController@createCustomer')->name('create.c
 Route::get('/customer/all','CustomerController@allCustomers')->name('customer.all');
 Route::get('/customer/getData/ajax','CustomerController@getCustomers')->name('customers.get');
 Route::get('/customer/{customer}/edit','CustomerController@edit')->name('customer.edit');
-Route::put('/customer/{customer}/update','CustomerController@update')->name('customer.update');
+Route::post('/customer/{customer}/update','CustomerController@update')->name('customer.update');
 Route::get('/customer/{customer}/delete','CustomerController@delete')->name('customer.delete');
+Route::get('/category/all','CategoryController@index');
 
+Route::get('/category/add','CategoryController@create');
+Route::post('/category/store','CategoryController@store');
+Route::get('/category/edit/{id}','CategoryController@edit');
+Route::post('/category/update/{id}','CategoryController@update');
+Route::get('/category/delete/{id}','CategoryController@delete');
 
+Route::get('/products/all','ProductsController@index');
+Route::get('/products/add','ProductsController@create');
+Route::post('/products/store','ProductsController@store');
+Route::get('/products/edit/{id}','ProductsController@edit');
+Route::post('/products/update/{id}','ProductsController@update');
+Route::get('/products/delete/{id}','ProductsController@delete');
 // Purchase Routes
 Route::get('/purchase/add','PurchaseController@add')->name('purchase.add');

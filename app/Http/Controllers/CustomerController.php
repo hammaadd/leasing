@@ -39,7 +39,7 @@ class CustomerController extends Controller
             $customer->address=$request->input('address');
             $customer->address_office=$request->input('office_address');
             $customer->cast=$request->input('cast');
-            $customer->cast=$request->input('cast');
+            
             if($request->file('cnic_photo')){
                 $img = new Image;
                 $file = $request->file('cnic_photo');
@@ -55,8 +55,6 @@ class CustomerController extends Controller
                 $img->save();
                 }
             $customer->created_by=Auth::id();
-
-
         $res = $customer->save();
         if($res){
             $request->session()->flash('success','Customer created successfully.');
@@ -98,14 +96,41 @@ class CustomerController extends Controller
     }
 
     public function update(Request $request, Customer $customer){
-        if($customer){
-            $res = $customer->update($request->all());
+        $update_array = array(
+        'name'=>$request->input('name'),
+            'cnic'=>$request->input('cnic'),
+            'gender'=>$request->input('gender'),
+            'father'=>$request->input('father'),
+            'phone'=>$request->input('phone'),
+            'office'=>$request->input('office'),
+            'profession'=>$request->input('profession'),
+            'designation'=>$request->input('designation'),
+            'address'=>$request->input('address'),
+            'address_office'=>$request->input('office_address'),
+            'cast'=>$request->input('cast'),
+        );
+       $res = Customer::where('id',$customer->id)->update($update_array);
+            if($request->file('cnic_photo')){
+                $file = $request->file('cnic_photo');
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $imgname = uniqid() . $filename;
+                $destinationPath = public_path('/cnic');
+                $file->move($destinationPath, $imgname);
+                $customer->cnic_photo= $imgname;
+                $update_image = array(
+                    'cnic_photo'=>$imgname,
+                        
+                    );
+                    Customer::where('id',$customer->id)->update($update_image);
+                }
+          
             if($res):
                 $request->session()->flash('success','Customer updated successfully.');
             else:
                 $request->session()->flash('error','Unable to update customer. Try again later.');
             endif;
-        }
+        
         return back();
     }
 
