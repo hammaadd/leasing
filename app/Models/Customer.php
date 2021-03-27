@@ -15,7 +15,7 @@ class Customer extends Model
 
     public function cnicImg()
     {
-        return $this->hasOne('App\Models\Image','cnic_image');
+        return $this->hasOne('App\Models\Image','id','cnic_image');
     }
 
 }

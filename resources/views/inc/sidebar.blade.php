@@ -48,6 +48,24 @@
                     </ul>
                 </li>
 
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-collection-fill"></i>
+                        <span>Products</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="">Add Product</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="">All Products</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="{{route('category.add')}}">Categories</a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="sidebar-title">Accounts</li>
 
                 <li class="sidebar-item  has-sub">

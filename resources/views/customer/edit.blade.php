@@ -12,7 +12,7 @@
             <form action="{{route('customer.update',$customer)}}" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     @csrf
-                  
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">Name of customer</label>
@@ -86,13 +86,13 @@
                             <label for="cast">Cast</label>
                             <input type="text" class="form-control" id="cast" name="cast" value="{{$customer->cast}}">
                         </div>
-                    </div> 
+                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="address">Address</label>
                             <input type="text" class="form-control" id="address" name="address" value="{{$customer->address}}">
                         </div>
-                    </div> 
+                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="office_address">Office Address</label>
@@ -104,6 +104,31 @@
                             <label for="cnic_photo">CNIC Photo</label>
                             <input type="file" class="form-control" id="cnic_photo" name="cnic_photo" value="{{old('cnic_photo')}}">
                         </div>
+                    </div>
+                    <div class="col-md-12">
+
+                        <hr>
+
+                            <div class="row m-2">
+                                @if(isset($customer->cnicImg->name))
+                                    <div class="col-md-6 flex justify-content-center">
+                                        <img class="img-thumbnail w-90" src="{{asset('cnic/'.$customer->cnicImg->name)}}">
+                                        <a href="{{asset('cnic/'.$customer->cnicImg->name)}}" target="_blank"> {{$customer->cnicImg->name}}</a>
+                                        <a class="btn btn-danger btn-sm mr-0 mt-2" href="{{route('customer.delete.cnic',$customer->cnic_image)}}" title="Delete CNIC image." onclick="return confirm('Do you really want to delete the CNIC image?');">Delete CNIC<i class="bi bi-trash"></i></a>
+                                    </div>
+                                    <input type="hidden" value="{{$customer->cnicImg->id}}" name="cnic_image_id">
+                                @else
+                                    <div class="col-md-6">
+                                        <h4 class="text-danger">No CNIC image added....</h4>
+                                    </div>
+                                @endif
+                                <div class="col-md-6">
+
+                                </div>
+                            </div>
+
+
+
                     </div>
                     <button class="btn btn-primary" type="submit"><i class="bi bi-plus-square"></i> Save customer record</button>
                 </div>

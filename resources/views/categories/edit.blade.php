@@ -5,7 +5,7 @@
 <section class="section">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Category form</h4>
+            <h4 class="card-title"><a class="btn btn-secondary btn-sm mr-2" title="Go back" href="{{route('category.add')}}"><i class="bi bi-arrow-left"></i>Go back</a>Update Category</h4>
         </div>
 
         <div class="card-body">
@@ -14,7 +14,7 @@
                     @csrf
                     <div class="col-md-6 offset-md-3">
                         <div class="form-group">
-                            <label for="name">Name of Category</label>
+                            <label for="name">Name</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{$categories->name}}" required>
                             @error('name')
                                 <div class="invalid-feedback">
@@ -25,19 +25,19 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="type">Category type</label>
+                                <label for="type">Type</label>
                                <select name="type" id="" class="form-control">
                                    <option value="Product" @if ($categories->type=='Product')
                                        selected
                                    @endif>Product</option>
                                </select>
                             </div>
-                        <button class="btn btn-primary btn-block" type="submit"><i class="bi bi-plus-square"></i> Save Cateogry record</button>
+                        <button class="btn btn-secondary btn-block" type="submit"><i class="bi bi-plus-square"></i> Update Cateogry record</button>
                     </div>
-                   
 
-                     
-                    
+
+
+
                 </div>
             </form>
         </div>

@@ -27,8 +27,10 @@ Route::get('/customer/{customer}/edit','CustomerController@edit')->name('custome
 Route::post('/customer/{customer}/update','CustomerController@update')->name('customer.update');
 Route::get('/customer/{customer}/delete','CustomerController@delete')->name('customer.delete');
 Route::get('/category/all','CategoryController@index');
+Route::get('/customer/image/{imgId}/delete','CustomerController@deleteCnicImage')->name('customer.delete.cnic');
 
-Route::get('/category/add','CategoryController@create');
+
+Route::get('/category/all/categories','CategoryController@create')->name('category.add');
 Route::post('/category/store','CategoryController@store');
 Route::get('/category/edit/{id}','CategoryController@edit');
 Route::post('/category/update/{id}','CategoryController@update');

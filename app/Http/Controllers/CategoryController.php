@@ -11,20 +11,21 @@ class CategoryController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
-    {
-        $categories = Category::all();
-        return view('categories/all',['categories'=>$categories]);
-    }
+    // public function index()
+    // {
+    //     $categories = Category::all();
+    //     return view('categories/all',['categories'=>$categories]);
+    // }
     public function create()
     {
-        return view('categories/add');
+        $categories = Category::all();
+        return view('categories/all',compact('categories'));
     }
     public function store(Request $request)
     {
         $request->validate([
             'name'=>'required|unique:categories',
-            
+
         ]);
         $category = new Category;
         $category->name = $request->input('name');
@@ -37,7 +38,7 @@ class CategoryController extends Controller
             $request->session()->flash('error','Unable to create Category. Try again later.');
         }
 
-        return redirect('category/all');
+        return back();
     }
     public function edit($id)
     {
@@ -48,12 +49,12 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name'=>'required'
-            
+
         ]);
        $update_category = array(
         'name' => $request->input('name'),
         'type' => $request->input('type'),
-      
+
        );
        $res = Category::where('id',$id)->update($update_category);
         if($res){
@@ -63,7 +64,7 @@ class CategoryController extends Controller
         }
 
         return redirect('category/all');
-    
+
     }
     public function delete($id, Request $request)
     {
@@ -74,6 +75,6 @@ class CategoryController extends Controller
             $request->session()->flash('error','Unable to delete Category. Try again later.');
         }
 
-        return redirect('category/all');
+        return back();
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Yajra\Datatables\Datatables;
 
 class CustomerController extends Controller
@@ -39,7 +40,7 @@ class CustomerController extends Controller
             $customer->address=$request->input('address');
             $customer->address_office=$request->input('office_address');
             $customer->cast=$request->input('cast');
-            
+
             if($request->file('cnic_photo')){
                 $img = new Image;
                 $file = $request->file('cnic_photo');
@@ -54,6 +55,8 @@ class CustomerController extends Controller
                 // $customer->cnic_photo= $imgname;
                 $img->save();
                 }
+            $customer->cnic_image = $img->id;
+
             $customer->created_by=Auth::id();
         $res = $customer->save();
         if($res){
@@ -117,20 +120,33 @@ class CustomerController extends Controller
                 $imgname = uniqid() . $filename;
                 $destinationPath = public_path('/cnic');
                 $file->move($destinationPath, $imgname);
-                $customer->cnic_photo= $imgname;
+                if(null!=$request->input('cnic_image_id')){
+                    $imag = Image::find($request->input('cnic_image_id'));
+                    $image_path = "cnic/".$imag->name;  // Value is not URL but directory file path
+                    if(File::exists($image_path)) {
+                        File::delete($image_path);
+                    }
+                    $res = $imag->delete();
+                }
+                $img = new Image;
+                $img->name = $imgname;
+                $img->created_by = Auth::id();
+                $img->alt = $request->input('name');
+                // $customer->cnic_photo= $imgname;
+                $img->save();
                 $update_image = array(
-                    'cnic_photo'=>$imgname,
-                        
+                    'cnic_image'=>$img->id,
+
                     );
                     Customer::where('id',$customer->id)->update($update_image);
                 }
-          
+
             if($res):
                 $request->session()->flash('success','Customer updated successfully.');
             else:
                 $request->session()->flash('error','Unable to update customer. Try again later.');
             endif;
-        
+
         return back();
     }
 
@@ -143,6 +159,26 @@ class CustomerController extends Controller
                 $request->session()->flash('error','Unable to delete customer. Try again later.');
             endif;
         }
+        return back();
+    }
+
+    public function deleteCnicImage(Request $request, $imgId){
+        if($imgId){
+            $img = Image::find($imgId);
+            $image_path = "cnic/".$img->name;  // Value is not URL but directory file path
+            if(File::exists($image_path)) {
+                File::delete($image_path);
+            }
+            $res = $img->delete();
+            if($res):
+                $request->session()->flash('success','CNIC deleted successfully.');
+            else:
+                $request->session()->flash('error','Unable to delete CNIC. Try again later.');
+            endif;
+        }else{
+            $request->session()->flash('error','Unable to delete CNIC. Try again later.');
+        }
+
         return back();
     }
 }
