@@ -22,6 +22,7 @@ class CreateVendorsTable extends Migration
             $table->foreign('ledger')->references('id')->on('ledgers')->onDelete('set null');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users');
+            $table->string('contact_no',191)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
