@@ -57,7 +57,7 @@
                             <input type="date" class="form-control"  name="date" value="{{$product->date}}" required>
                         </div>
                     </div>
-                        <button class="btn btn-primary btn-block" type="submit"><i class="bi bi-plus-square"></i> Save Cateogry record</button>
+                        <button class="btn btn-primary btn-block" type="submit"><i class="bi bi-pencil"></i> Update Product record</button>
                     </div>
                    
 
