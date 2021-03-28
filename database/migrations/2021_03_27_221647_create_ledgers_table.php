@@ -17,8 +17,8 @@ class CreateLedgersTable extends Migration
             $table->id();
             $table->string('name',191)->nullable();
             $table->enum('type',['Customer','Vendor','Investment','Other']);
-            $table->unsignedBigInteger('cust_id')->nullable();
-            $table->foreign('cust_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->unsignedBigInteger('cust_id')->nullable();
+            // $table->foreign('cust_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('status',['Jamah','Name','Clear']);
             $table->bigInteger('amount')->default(0);
             $table->bigInteger('j_amount')->default(0);
