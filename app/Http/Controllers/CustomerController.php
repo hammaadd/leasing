@@ -54,8 +54,9 @@ class CustomerController extends Controller
                 $img->alt = $request->input('name');
                 // $customer->cnic_photo= $imgname;
                 $img->save();
+                $customer->cnic_image = $img->id;
                 }
-            $customer->cnic_image = $img->id;
+            
 
             $customer->created_by=Auth::id();
         $res = $customer->save();
@@ -100,7 +101,7 @@ class CustomerController extends Controller
 
     public function update(Request $request, Customer $customer){
         $update_array = array(
-        'name'=>$request->input('name'),
+            'name'=>$request->input('name'),
             'cnic'=>$request->input('cnic'),
             'gender'=>$request->input('gender'),
             'father'=>$request->input('father'),

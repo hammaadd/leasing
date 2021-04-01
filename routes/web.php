@@ -44,3 +44,12 @@ Route::post('/products/update/{id}','ProductsController@update');
 Route::get('/products/delete/{id}','ProductsController@delete');
 // Purchase Routes
 Route::get('/purchase/add','PurchaseController@add')->name('purchase.add');
+ 
+Route::get('/vendors/add','VendorsController@addView')->name('vendors.add');
+Route::post('/vendors/add','VendorsController@createVendor')->name('create.vendor');
+Route::get('/vendors/all','VendorsController@allVendors')->name('vendors.all');
+Route::get('/vendors/getData/ajax','VendorsController@getVendorss')->name('vendorss.get');
+Route::get('/vendors/{vendors}/edit','VendorsController@edit')->name('vendors.edit');
+Route::post('/vendors/{vendors}/update','VendorsController@update')->name('vendors.update');
+Route::get('/vendors/{vendors}/delete','VendorsController@delete')->name('vendors.delete');
+Route::get('/category/all','CategoryController@index');
