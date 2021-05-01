@@ -64,15 +64,7 @@ class CustomerController extends Controller
                 // $customer->cnic_photo= $imgname;
                 $img->save();
                 $customer->cnic_image = $img->id;
-                }
-<<<<<<< Updated upstream
-            
-=======
-            if(isset($img)){
-                $customer->cnic_image = $img->id;
             }
->>>>>>> Stashed changes
-
             $customer->created_by=Auth::id();
         $res = $customer->save();
         if($res){
