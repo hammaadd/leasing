@@ -27,8 +27,10 @@ Route::get('/customer/{customer}/edit','CustomerController@edit')->name('custome
 Route::post('/customer/{customer}/update','CustomerController@update')->name('customer.update');
 Route::get('/customer/{customer}/delete','CustomerController@delete')->name('customer.delete');
 Route::get('/category/all','CategoryController@index');
+Route::get('/customer/image/{imgId}/delete','CustomerController@deleteCnicImage')->name('customer.delete.cnic');
 
-Route::get('/category/add','CategoryController@create');
+
+Route::get('/category/all/categories','CategoryController@create')->name('category.add');
 Route::post('/category/store','CategoryController@store');
 Route::get('/category/edit/{id}','CategoryController@edit');
 Route::post('/category/update/{id}','CategoryController@update');
@@ -42,3 +44,12 @@ Route::post('/products/update/{id}','ProductsController@update');
 Route::get('/products/delete/{id}','ProductsController@delete');
 // Purchase Routes
 Route::get('/purchase/add','PurchaseController@add')->name('purchase.add');
+ 
+Route::get('/vendors/add','VendorsController@addView')->name('vendors.add');
+Route::post('/vendors/add','VendorsController@createVendor')->name('create.vendor');
+Route::get('/vendors/all','VendorsController@allVendors')->name('vendors.all');
+Route::get('/vendors/getData/ajax','VendorsController@getVendorss')->name('vendorss.get');
+Route::get('/vendors/{vendors}/edit','VendorsController@edit')->name('vendors.edit');
+Route::post('/vendors/{vendors}/update','VendorsController@update')->name('vendors.update');
+Route::get('/vendors/{vendors}/delete','VendorsController@delete')->name('vendors.delete');
+Route::get('/category/all','CategoryController@index');

@@ -13,6 +13,6 @@ class Image extends Model
 
     public function customer()
     {
-        return $this->belongsTo('App\Models\Customer','cnic_image');
+        return $this->belongsTo('App\Models\Customer','id','cnic_image');
     }
 }

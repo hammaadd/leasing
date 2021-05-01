@@ -16,7 +16,7 @@ class CustomersAddImage extends Migration
         //
         Schema::table('customers', function (Blueprint $table) {
             $table->unsignedBigInteger('cnic_image')->nullable();
-            $table->foreign('cnic_image')->references('id')->on('images');
+            $table->foreign('cnic_image')->references('id')->on('images')->onDelete('set null');
         });
 
     }
