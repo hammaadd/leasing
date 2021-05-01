@@ -45,19 +45,19 @@ Route::post('/products/store','ProductsController@store');
 Route::get('/products/edit/{id}','ProductsController@edit')->name('product.edit');
 Route::post('/products/update/{id}','ProductsController@update');
 Route::get('/products/delete/{id}','ProductsController@delete');
-<<<<<<< Updated upstream
+
 // Purchase Routes
 Route::get('/purchase/add','PurchaseController@add')->name('purchase.add');
  
-Route::get('/vendors/add','VendorsController@addView')->name('vendors.add');
-Route::post('/vendors/add','VendorsController@createVendor')->name('create.vendor');
-Route::get('/vendors/all','VendorsController@allVendors')->name('vendors.all');
-Route::get('/vendors/getData/ajax','VendorsController@getVendorss')->name('vendorss.get');
-Route::get('/vendors/{vendors}/edit','VendorsController@edit')->name('vendors.edit');
-Route::post('/vendors/{vendors}/update','VendorsController@update')->name('vendors.update');
-Route::get('/vendors/{vendors}/delete','VendorsController@delete')->name('vendors.delete');
-Route::get('/category/all','CategoryController@index');
-=======
+// Route::get('/vendors/add','VendorsController@addView')->name('vendors.add');
+// Route::post('/vendors/add','VendorsController@createVendor')->name('create.vendor');
+// Route::get('/vendors/all','VendorsController@allVendors')->name('vendors.all');
+// Route::get('/vendors/getData/ajax','VendorsController@getVendorss')->name('vendorss.get');
+// Route::get('/vendors/{vendors}/edit','VendorsController@edit')->name('vendors.edit');
+// Route::post('/vendors/{vendors}/update','VendorsController@update')->name('vendors.update');
+// Route::get('/vendors/{vendors}/delete','VendorsController@delete')->name('vendors.delete');
+// Route::get('/category/all','CategoryController@index');
+
 Route::get('/product/get/selectAjax','ProductsController@dataAjax')->name('product.selectAjax');
 Route::get('/product/get/product/byId','ProductsController@getProductById')->name('product.getProductById');
 
@@ -99,4 +99,3 @@ Route::get('leasing/installment/plan','LeasingController@installmentPlan')->name
 //Invoices
 
 Route::get('leasing/invoice','LeasingController@invoice')->name('leasing.invoice');
->>>>>>> Stashed changes
