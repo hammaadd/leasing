@@ -16,12 +16,13 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Products::all();
-        return view('products/all',['products'=>$products]);
+        $categories = Category::all();
+        return view('products/all',['products'=>$products,'categories'=>$categories]);
     }
     public function create()
     {
         $categories = Category::all();
-        
+
         return view('products/add',['categories'=>$categories]);
     }
     public function store(Request $request)
@@ -70,7 +71,7 @@ class ProductsController extends Controller
         'purchase_price' => $request->input('purchase_price'),
         'sale_price' => $request->input('sale_price'),
         'date' => $request->input('date'),
-        
+
         );
         $res = Products::where('id',$id)->update($update_prodcuts);
         if($res){
@@ -79,9 +80,9 @@ class ProductsController extends Controller
             $request->session()->flash('error','Unable to update Prodcut. Try again later.');
         }
 
-       
+
         return redirect('products/all');
-    
+
     }
     public function delete($id, Request $request)
     {
@@ -93,5 +94,36 @@ class ProductsController extends Controller
         }
 
         return redirect('category/all');
+    }
+
+    public function dataAjax(Request $request)
+    {
+    	$data = [];
+
+        if($request->has('q')){
+            $search = $request->q;
+            $data =Products::select("id","name","purchase_price","sale_price")
+            		->where('name','LIKE',"%$search%")
+                    ->where('in_stock','1')
+            		->get();
+        }else{
+            $search = $request->q;
+            $data =Products::select("id","name","purchase_price","sale_price")
+            		->where('name','LIKE',"%$search%")
+                    ->where('in_stock','1')
+            		->latest()->limit(10)->get();
+        }
+        return response()->json($data);
+    }
+
+    public function getProductById(Request $request){
+        if($request->ajax()){
+            $id = $request->id;
+            $data = Products::select("id","name","purchase_price","sale_price")
+            ->where('id','=',$id)
+            ->where('in_stock','1')
+            ->first();
+        }
+        echo json_encode($data);
     }
 }

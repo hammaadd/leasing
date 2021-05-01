@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LeasingDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('main.dashboard');
+        $details = LeasingDetail::whereDate('date',date('Y-m-d'))->get();
+        //dd($details);
+        return view('main.dashboard',compact('details'));
     }
 }

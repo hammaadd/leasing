@@ -26,11 +26,11 @@
                         <i class="bi bi-people"></i>
                         <span>Customers</span>
                     </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
+                    <ul class="submenu {{Request::is('customer/*') ? 'active' : ''}}" {{Request::is('customer/*') ? 'style="display:block;"' : ''}}>
+                        <li class="submenu-item {{Request::is('customer/add') ? 'active' : ''}}" >
                             <a href="{{route('customer.add')}}">Add Customer</a>
                         </li>
-                        <li class="submenu-item ">
+                        <li class="submenu-item {{Request::is('customer/all') ? 'active' : ''}}">
                             <a href="{{route('customer.all')}}">All Customers</a>
                         </li>
                     </ul>
@@ -43,7 +43,10 @@
                     </a>
                     <ul class="submenu ">
                         <li class="submenu-item ">
-                            <a href="">Leasing form</a>
+                            <a href="{{route('leasing.add')}}">Leasing form</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="{{route('leasing.all')}}">Leasing Applications</a>
                         </li>
                     </ul>
                 </li>
@@ -54,11 +57,11 @@
                         <span>Products</span>
                     </a>
                     <ul class="submenu ">
+                        {{-- <li class="submenu-item ">
+                            <a href="{{route('product.add')}}">Add Product</a>
+                        </li> --}}
                         <li class="submenu-item ">
-                            <a href="">Add Product</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="">All Products</a>
+                            <a href="{{route('product.all')}}">Products</a>
                         </li>
                         <li class="submenu-item ">
                             <a href="{{route('category.add')}}">Categories</a>
@@ -67,6 +70,30 @@
                 </li>
 
                 <li class="sidebar-title">Accounts</li>
+
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-receipt"></i>
+                        <span>Vendor</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="{{route('vendor.all')}}">Vendors</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-receipt"></i>
+                        <span>Ledger</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="{{route('ledger.all')}}">Ledgers</a>
+                        </li>
+                    </ul>
+                </li>
 
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>

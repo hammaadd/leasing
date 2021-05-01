@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class LedgerDetail extends Model
+class LeasingDetail extends Model
 {
-    use SoftDeletes;
+
     use HasFactory;
+    protected $table = "leasing_details";
     protected $guarded = [];
 
-    public function ledger(){
-       $this->belongsTo(Ledger::class, 'ledger_id');
+    public function leasing(){
+        return $this->belongsTo(Leasing::class,'leasing_id','id');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Image;
+use App\Models\Ledger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -28,6 +29,13 @@ class CustomerController extends Controller
             'cnic'=>'required|unique:customers',
         ]);
 
+            $ledger = new Ledger();
+            $ledger->name = $request->input('name').' -- '.$request->input('cnic');
+            $ledger->type = 'Customer';
+            $ledger->status = 'Clear';
+            $ledger->created_by = Auth::id();
+            $ledger->save();
+
             $customer = new Customer;
             $customer->name=$request->input('name');
             $customer->cnic=$request->input('cnic');
@@ -40,6 +48,7 @@ class CustomerController extends Controller
             $customer->address=$request->input('address');
             $customer->address_office=$request->input('office_address');
             $customer->cast=$request->input('cast');
+            $customer->ledger = $ledger->id;
 
             if($request->file('cnic_photo')){
                 $img = new Image;
@@ -56,7 +65,13 @@ class CustomerController extends Controller
                 $img->save();
                 $customer->cnic_image = $img->id;
                 }
+<<<<<<< Updated upstream
             
+=======
+            if(isset($img)){
+                $customer->cnic_image = $img->id;
+            }
+>>>>>>> Stashed changes
 
             $customer->created_by=Auth::id();
         $res = $customer->save();
@@ -181,5 +196,32 @@ class CustomerController extends Controller
         }
 
         return back();
+    }
+
+    public function dataAjax(Request $request)
+    {
+    	$data = [];
+
+        if($request->has('q')){
+            $search = $request->q;
+            $data =Customer::select("id","name","cnic")
+            		->where('name','LIKE',"%$search%")
+            		->get();
+        }else{
+            $search = $request->q;
+            $data =Customer::select("id","name","cnic")
+            		->where('name','LIKE',"%$search%")
+            		->latest()->limit(10)->get();
+        }
+        return response()->json($data);
+    }
+
+    public function getCustomerById(Request $request){
+        if($request->ajax()){
+            $id = $request->id;
+            $data = Customer::where('id','=',$id)
+            ->first();
+        }
+        echo json_encode($data);
     }
 }

@@ -6,7 +6,41 @@
 <script src="{{asset('assets/js/pages/dashboard.js')}}"></script>
 @endsection
 @section('content')
-
+<section class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Reciveables <a href="#" class="btn btn-sm btn-secondary">View all records</a></h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Installment</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($details as $det)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td><a href="#">{{$det->leasing->customer->name}}</a></td>
+                            <td>{{$det->date}}</td>
+                            <td>{{$det->leasing->installment}}</td>
+                            <td></td>
+                        </tr>
+                        @empty
+                            <p>No Reciveables to show.</p>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
                 <section class="row">
                     <div class="col-12 col-lg-9">
                         <div class="row">
@@ -21,6 +55,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="row">
                             <div class="col-12 col-xl-4">
                                 <div class="card">
@@ -198,6 +233,7 @@
                         </div>
                     </div>
                 </section>
+                
 @endsection
 
 
