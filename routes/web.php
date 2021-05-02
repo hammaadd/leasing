@@ -92,6 +92,8 @@ Route::get('/leasing/getData/ajax','LeasingController@getLeasing')->name('leasin
 Route::get('/leasing/view/{leasing}','LeasingController@view')->name('leasing.view');
 Route::get('/leasing/edit/{leasing}','LeasingController@edit')->name('leasing.edit');
 
+Route::post('/leasing/update/{leasing}','LeasingController@update')->name('leasing.update');
+
 //Testing routes
 
 Route::get('leasing/installment/plan','LeasingController@installmentPlan')->name('installment.plan');
